@@ -37,6 +37,7 @@ public class RegistrationSystem {
 
         registerStudent(new OnlineStudent(1, "Erika"), softwareConstruction);
         registerStudent(new OnlineStudent(2, "James"), softwareConstruction);
+        registerStudent(new OnlineStudent(3, "Jack"), softwareConstruction);
         softwareConstruction.printEnrolled();
 
         elisa.prepareModule("Observer Pattern");
