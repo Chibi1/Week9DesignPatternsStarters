@@ -2,9 +2,10 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
 
-public class Inventory {
+public class Inventory implements Iterable<Toy> {
     private Collection<Toy> toys = new ArrayList<>();
     private Collection<Toy> backlog = new ArrayList<>();
     private ArrayList<String> log = new ArrayList<>();
@@ -35,4 +36,29 @@ public class Inventory {
     }
 
 
+    @Override
+    public Iterator<Toy> iterator() {
+        return new InventoryIterator();
+    }
+
+    private class InventoryIterator implements Iterator<Toy> {
+        Iterator toysIterator = toys.iterator();
+        Iterator backlogIterator = backlog.iterator();
+
+        @Override
+        public boolean hasNext() {
+            return toysIterator.hasNext() || backlogIterator.hasNext();
+        }
+
+        @Override
+        public Toy next() {
+            Toy toy;
+            if (toysIterator.hasNext()) {
+                toy = (Toy) toysIterator.next();
+            } else {
+                toy = (Toy) backlogIterator.next();
+            }
+            return toy;
+        }
+    }
 }
